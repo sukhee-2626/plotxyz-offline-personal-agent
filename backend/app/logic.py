@@ -162,7 +162,7 @@ def agent_offline_personal(payload):
         if re.fullmatch(r"[0-9\s+\-*/().%]+", message) and re.search(r"[+\-*/%]", message):
             try:
                 node = ast.parse(message, mode="eval")
-                allowed = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.Pow, ast.USub, ast.UAdd)
+                allowed = (ast.Expression, ast.BinOp, ast.UnaryOp, ast.Constant, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.Mod, ast.USub, ast.UAdd)
                 if any(not isinstance(item, allowed) for item in ast.walk(node)):
                     raise ValueError("unsupported expression")
                 value = eval(compile(node, "<calc>", "eval"), {"__builtins__": {}}, {})
